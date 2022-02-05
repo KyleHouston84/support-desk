@@ -11,14 +11,14 @@ const registerUser = asyncHandler(async (req, res) => {
   // Validation
   if(!name || !email || !password) {
     res.status(400);
-    throw new error('Please include all fields');
+    throw new Error('Please include all fields');
   }
 
   // Find if user exists
   const userExsits = await User.findOne({email});
   if (userExsits) {
     res.status(400);
-    throw new error('User already exsits');
+    throw new Error('User already exsits');
   }
 
   // Hash password
@@ -40,7 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     })
   } else {
     res.status(400);
-    throw new error('Invalid user data')
+    throw new Error('Invalid user data')
   }
 
   res.send('Register Route');
