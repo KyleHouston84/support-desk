@@ -15,7 +15,7 @@ const ticketSchema = mongoose.Schema({
     type: String,
     required: [true, 'Please enter a description for the ticket']
   },
-  statue: {
+  status: {
     type: String,
     required: true,
     enum: ['new', 'open', 'closed'],
