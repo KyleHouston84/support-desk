@@ -4,6 +4,7 @@ import { FaUser } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { register, reset } from '../features/auth/authSlice';
+import Spinner from "../components/Spinner";
 
 function Register() {
   const [ formData, setFormData ] = useState({
@@ -21,10 +22,7 @@ function Register() {
   const { user, isLoading, isError, isSuccess, message } = useSelector(state => state.auth);
 
   useEffect(() => {
-    if (isError) {
-      console.log("🚀 ~ file: Register.jsx ~ line 25 ~ useEffect ~ isError", isError, message)
-      toast.error(message);
-    }
+    if (isError) toast.error(message);
 
     // Redirect when logged in
     if (isSuccess || user) navigate('/');
@@ -52,6 +50,8 @@ function Register() {
       dispatch(register(userData));
     };
   }
+
+  if (isLoading) return <Spinner />
 
   return (
     <>
